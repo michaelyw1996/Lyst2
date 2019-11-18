@@ -1,0 +1,68 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<h1>Create Lyst</h1>
+
+
+<!-- change 1: or: createlist
+<p>
+  {{ form.title.label }}<br>
+  {{ form.title(size=48) }}
+</p>
+<p>
+  {{ form.listItem.label }}<br>
+  {{ form.listItem(size=48) }}
+</p>
+-->
+
+    <script>
+
+    function colorButton() {
+        document.getElementById('btn-important').style.color = 'red';
+
+    }
+    </script>
+
+        <form action="/add" method="POST">
+            <p>
+        <input type="text" name="todoitem">
+            </p>
+<button class="btn btn-lg btn-primary" type="submit">Submit</button>
+
+</form>
+
+        <h2> Incomplete Items </h2>
+        <ul>
+            {% for todo in todos %}
+
+            <li  style="font-size: 15pt, ">{{ todo.text }} <form action = "{{ url_for('complete', id = todo.id) }}" >
+                </li>
+
+                <button class="btn btn-sm btn-primary" type="submit">Done</button>
+                </form>
+               <form action="{{ url_for('important', id = todo.id) }}">
+                <button class="btn btn-sm btn-secondary" id="btn-important" type="submit">Important</button>
+                </form>
+
+
+
+
+                <break></break>
+            {% endfor %}
+
+
+            <h2 style=" color: red"> important Items </h2>
+                <ul>
+                    {% for todo in important %}
+                    <li  style="font-size: 15pt">
+                        {{ todo.text }}
+                    </li>
+                        {% endfor %}
+                </ul>
+
+        </ul>
+
+
+
+{% endblock %}
