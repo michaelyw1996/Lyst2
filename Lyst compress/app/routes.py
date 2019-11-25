@@ -64,7 +64,7 @@ def createlist():
         red = request.form.get('red')
         important = Todo.query.filter_by(importantItem = True).all()
 
-        return render_template('createlist.html', title='Create Lyst', form=form, todos=todos, red = red, important= important)
+        return render_template('createlist.html', title='Create Lyst', form=form, todos=todos, red = red, important = important)
 
 
 @app.route('/Lindex')
@@ -85,7 +85,9 @@ def add():
 @app.route('/viewlist')
 def viewlist():
     todos = Todo.query.filter_by(complete=False).all()
-    return render_template('viewlist.html', title='View Lyst', todos=todos)
+    important = Todo.query.filter_by(importantItem = True).all()
+    red = request.form.get('red')
+    return render_template('viewlist.html', title='View Lyst', todos=todos, important = important, red = red)
 
 
 @app.route('/complete/<id>')
@@ -94,7 +96,7 @@ def complete(id):
     todo.complete = True
     todo.importantItem = False
     db.session.commit()
-    return redirect(url_for('createlist'))
+    return redirect(url_for('viewlist'))
 
 
 @app.route('/important/<id>')
@@ -102,7 +104,7 @@ def important(id):
     todo = Todo.query.filter_by(id=int(id)).first()
     todo.importantItem = True
     db.session.commit()
-    return redirect(url_for('createlist'))
+    return redirect(url_for('viewlist'))
 
 
 @app.route('/view_complete/<id>')
