@@ -1,0 +1,18 @@
+
+{% extends "base.html" %}
+{% block content %}
+
+<h1>Create a Forum Post</h1>
+<form action="#" method="post">
+   <div class="form-group">
+       <label for="name">Your Name:</label>
+       <input type="text" maxlength="100" name="name" placeholder="Name of the book">
+
+       <label for="author">Post:</label>
+       <input maxlength="100" name="author" placeholder="Author of the book">
+
+       <button type="submit">Create</button>
+   </div>
+</form>
+
+{% endblock %}

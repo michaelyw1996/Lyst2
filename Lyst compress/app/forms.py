@@ -36,3 +36,5 @@ class HomeForm(FlaskForm):
     toCreateList = SubmitField('Create List')
     toViewList = SubmitField('View List')
     toViewCalender = SubmitField('View Calender')
+    toForum = SubmitField('View Forum')
+    toForumNew = SubmitField('New Forum Post')

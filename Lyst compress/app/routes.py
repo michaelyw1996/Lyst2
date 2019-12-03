@@ -3,7 +3,7 @@ from app import app
 from app import db
 from app.forms import LoginForm
 from app.forms import RegistrationForm
-from app.models import User, Todo
+from app.models import User, Todo, Forum
 from flask_login import current_user, login_user
 from flask_login import logout_user
 from flask_login import login_required
@@ -113,3 +113,23 @@ def view_complete(id):
     todo.complete = True
     db.session.commit()
     return redirect(url_for('viewlist'))
+
+@app.route('/viewcalender')
+def viewcalender():
+    return render_template('viewcalender.html')
+
+
+@app.route('/forum')
+def showBooks():
+    forums = db.session.query(Forum).all()
+    return render_template("forum.html", forums=forums)
+
+@app.route('/forum/new/', methods=['GET', 'POST'])
+def newPost():
+    if request.method == 'POST':
+        newPost = db.Forum(title=request.form['name'], author=request.form['author'])
+        db.session.add(newPost)
+        db.session.commit()
+        return redirect(url_for('forum.html'))
+    else:
+        return render_template('newforumpost.html')

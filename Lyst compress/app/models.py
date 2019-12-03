@@ -27,6 +27,10 @@ class Todo(db.Model):
     importantItem = db.Column(db.Boolean)
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
 
+class Forum(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    title = db.Column(db.String(250), nullable=False)
+    author = db.Column(db.String(250), nullable=False)
 
 
 #putting this
