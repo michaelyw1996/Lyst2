@@ -60,9 +60,9 @@ def register():
 @app.route('/createlist')
 def createlist():
         form = CreateListForm()
-        todos = Todo.query.filter_by(complete=False).all()
+        todos = Todo.query.filter_by(user_id=current_user.id,complete=False)
         red = request.form.get('red')
-        important = Todo.query.filter_by(importantItem = True).all()
+        important = Todo.query.filter_by(user_id=current_user.id, importantItem = True)
 
         return render_template('createlist.html', title='Create Lyst', form=form, todos=todos, red = red, important = important)
 
@@ -76,7 +76,7 @@ def testing():
 
 @app.route('/add', methods=['Post'])
 def add():
-    todo = Todo(text=request.form['todoitem'], complete=False, importantItem=False)
+    todo = Todo(text=request.form['todoitem'], complete=False, importantItem=False, user_id=current_user.id)
     db.session.add(todo)
     db.session.commit()
     #was orginally directing to testing
@@ -84,15 +84,15 @@ def add():
 
 @app.route('/viewlist')
 def viewlist():
-    todos = Todo.query.filter_by(complete=False).all()
-    important = Todo.query.filter_by(importantItem = True).all()
+    todos = Todo.query.filter_by(user_id=current_user.id, complete=False)
+    important = Todo.query.filter_by(importantItem=True, user_id=current_user.id)
     red = request.form.get('red')
     return render_template('viewlist.html', title='View Lyst', todos=todos, important = important, red = red)
 
 
 @app.route('/complete/<id>')
 def complete(id):
-    todo = Todo.query.filter_by(id=int(id)).first()
+    todo = Todo.query.filter_by(id = int(id)).first()
     todo.complete = True
     todo.importantItem = False
     db.session.commit()
@@ -109,7 +109,7 @@ def important(id):
 
 @app.route('/view_complete/<id>')
 def view_complete(id):
-    todo = Todo.query.filter_by(id=int(id)).first()
+    todo = Todo.query.filter_by(user_id=current_user.id)
     todo.complete = True
     db.session.commit()
     return redirect(url_for('viewlist'))
