@@ -122,14 +122,14 @@ def viewcalender():
 @app.route('/forum')
 def showBooks():
     forums = db.session.query(Forum).all()
-    return render_template("forum.html", forums=forums)
+    return render_template('forum.html', forums=forums)
 
-@app.route('/forum/new/', methods=['GET', 'POST'])
+@app.route('/newforumpost', methods=['GET', 'POST'])
 def newPost():
     if request.method == 'POST':
-        newPost = db.Forum(title=request.form['name'], author=request.form['author'])
+        newPost = Forum(title=request.form['name'], author=request.form['author'])
         db.session.add(newPost)
         db.session.commit()
-        return redirect(url_for('forum.html'))
+        return redirect(url_for('index'))
     else:
         return render_template('newforumpost.html')
