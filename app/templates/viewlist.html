@@ -1,8 +1,7 @@
 {% extends "base.html" %}
 {% block content %}
-</form>
 
-        <h2> Incomplete Items </h2>
+        <h2 class="text-center"> Incomplete Items </h2>
         <ul>
             {% for todo in todos %}
 
@@ -19,14 +18,14 @@
             {% endfor %}
 
 
-            <h2 style=" color: red"> Important Items </h2>
-                <ul>
+            <h2 class="text-center", style=" color: red"> Important Items </h2>
+                <p>
                     {% for todo in important %}
-                    <li  style="font-size: 15pt">
+                    <p  style="font-size: 15pt">
                         {{ todo.text }}
-                    </li>
+                    </p>
                         {% endfor %}
-                </ul>
+                </p>
 
         </ul>
 
