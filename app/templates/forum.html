@@ -3,11 +3,11 @@
 
 <html>
 <body>
-<br><br>  
+<br><br>
 <h1>Forum Posts</h1>
 <ol>
     {% for forum in forums %}
-    <li> {{forum.title}} by {{forum.author}}</li>
+    <p> {{forum.title}} by {{forum.author}}</p>
     <br> <br>
     {% endfor %}
 </ol>
