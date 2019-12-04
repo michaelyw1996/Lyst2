@@ -3,18 +3,16 @@
 
 <html>
 <body>
-<br><br>
-<h1 class="text-center">Forum Posts</h1>
-<br>
-<div class="boxed">
-<p>
+  <br><br>
+  <h1 class="text-center">Forum Posts</h1>
+  <br>
+  <p>
     {% for forum in forums %}
-    <p> {{forum.title}} says {{forum.author}}</p>
+      <hr>
+      <p> {{forum.title}} says {{forum.author}}</p>
     <br>
     {% endfor %}
-</p>
-</div>
-
+  </p>
 </body>
 </html>
 {% endblock %}
