@@ -4,13 +4,14 @@
 <html>
 <body>
 <br><br>
-<h1>Forum Posts</h1>
-<ol>
+<h1 class="text-center">Forum Posts</h1>
+<br>
+<p>
     {% for forum in forums %}
-    <p> {{forum.title}} by {{forum.author}}</p>
+    <p> {{forum.title}} says {{forum.author}}</p>
     <br> <br>
     {% endfor %}
-</ol>
+</p>
 </body>
 </html>
 {% endblock %}
