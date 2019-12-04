@@ -4,25 +4,24 @@
 
 <h1>Create Lyst</h1>
 
-    <script>
-
-    function colorButton() {
-        document.getElementById('btn-important').style.color = 'red';
-
-    }
-    </script>
-
-        <form action="/add" method="POST">
-            <p>
-        <input type="text" name="todoitem">
-            </p>
-<button class="btn btn-lg btn-primary" type="submit" onclick="myFunction()">Submit</button>
 <script>
+  function colorButton() {
+    document.getElementById('btn-important').style.color = 'red';
+
+  }
+</script>
+
+<form action="/add" method="POST">
+  <p>
+    <input type="text" name="todoitem">
+  </p>
+  <button class="btn btn-lg btn-primary" type="submit" onclick="myFunction()">Submit</button>
+  <script>
     function myFunction() {
-        alert("Success: You have added item to your list");
+      alert("Success: You have added item to your list");
 
     }
-</script>
+  </script>
 
 </form>
 
