@@ -3,18 +3,25 @@ from app.models import User
 from app.models import Forum
 from app.models import Todo
 
-
-
 def test_get_login_page(client):
     response = client.get('/login')
     print (response.data)
     assert response.status_code == 200
 
-    #assert b'Email' in response.data
-    #assert b'Password' in response.data
-
-def test_get_main_page(client):
+def test_get_forum_page(client):
     response = client.get('/forum')
+    assert response.status_code == 200
+
+def test_get_mainpage(client):
+    response = client.get('/')
+    assert response.status_code == 302
+
+def test_get_register(client):
+    response = client.get('/register')
+    assert response.status_code == 200
+
+def test_get_newforumpost(client):
+    response = client.get('/newforumpost')
     assert response.status_code == 200
 
 def test_add_user_to_db(db):
@@ -34,12 +41,3 @@ def test_add_item_to_list(db):
     db.session.add(todo1)
     db.session.commit()
     assert len(Todo.query.all()) == 1
-
-def test_valid_register(client, db):
-    response = client.post('/register',
-                                data=dict(username='testing', email='testing@testing.com', password_hash='testing', confirm='testing'),
-                                follow_redirects=True)
-    assert response.status_code == 200
-    assert b"You are now logged in!" in response.data
-    assert b'Hi !' in response.data
-    assert b'Log out' in response.data
