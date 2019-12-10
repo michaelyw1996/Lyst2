@@ -1,15 +1,17 @@
 from flask import render_template, flash, redirect, url_for
-from app import app
-from app import db
-from app.forms import LoginForm
-from app.forms import RegistrationForm
-from app.models import User, Todo, Forum
+from . import db
+from .forms import LoginForm
+from .forms import RegistrationForm
+from .models import User, Todo, Forum
 from flask_login import current_user, login_user
 from flask_login import logout_user
 from flask_login import login_required
 from flask import request
 from werkzeug.urls import url_parse
-from app.forms import CreateListForm
+from .forms import CreateListForm, HomeForm
+from flask import current_app as app
+from . import login_manager
+
 
 @app.route('/')
 @app.route('/index')
@@ -133,3 +135,10 @@ def newPost():
         return redirect(url_for('index'))
     else:
         return render_template('newforumpost.html')
+
+@login_manager.user_loader
+def load_user(user_id):
+    """Check if user is logged-in on every page load."""
+    if user_id is not None:
+        return User.query.get(user_id)
+    return None
