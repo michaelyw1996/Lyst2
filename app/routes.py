@@ -12,7 +12,6 @@ from .forms import CreateListForm, HomeForm
 from flask import current_app as app
 from . import login_manager
 
-
 @app.route('/')
 @app.route('/index')
 @login_required
@@ -73,7 +72,7 @@ def createlist():
 def testing():
         #todos = Todo.query.all()
         #changed todos =todos
-
+        #test
         return render_template('testing.html')
 
 @app.route('/add', methods=['Post'])
